@@ -20,9 +20,18 @@ export class CartPanel {
 
     }
 
-    async openCartPanel(homePage: HomePage): Promise<void>{
-        await homePage.cartButton.click();
-        await this.panel.waitFor({ state: 'visible' });
-    }
+async openCartPanel(homePage: HomePage): Promise<void> {
+  // Wait until the element is attached (in the DOM)
+  await homePage.cartButton.waitFor({ state: 'attached' });
+
+  // Wait until it becomes visible
+  await homePage.cartButton.waitFor({ state: 'visible' });
+
+  // Click it
+  await homePage.cartButton.click();
+
+  // Wait for the panel to appear
+  await this.panel.waitFor({ state: 'visible' });
+}
 
 }
