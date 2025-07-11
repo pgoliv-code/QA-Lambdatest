@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 
-export class BillingAdress {
+export class BillingAddress {
 
     readonly page: Page;
     readonly companyInput: Locator
@@ -8,8 +8,8 @@ export class BillingAdress {
     readonly addressTwoInput: Locator
     readonly cityInput: Locator
     readonly postalCodeInput: Locator
-    readonly countryInput: Locator
-    readonly zoneInput: Locator
+    readonly countrySelect: Locator
+    readonly zoneSelect: Locator
     readonly saveButton: Locator
     
 
@@ -20,8 +20,8 @@ export class BillingAdress {
         this.addressTwoInput = page.locator('[id="input-payment-adress-2"]');
         this.cityInput = page.locator('[id="input-payment-city"]');
         this.postalCodeInput = page.locator('[id="input-payment-postalcode"]');
-        this.countryInput = page.locator('[id="input-payment-country"]');
-        this.zoneInput = page.locator('[id="input-payment-zone"]');
+        this.countrySelect = page.locator('[id="input-payment-country"]');
+        this.zoneSelect = page.locator('[id="input-payment-zone"]');
         this.saveButton = page.locator('[id="button-save"]');
     }
 
@@ -49,14 +49,14 @@ export class BillingAdress {
         await this.postalCodeInput.waitFor({ state: 'visible'})
         await this.postalCodeInput.fill(postalCode)
     }
-    async fillCountry(country: string): Promise<void> {
-        await this.countryInput.waitFor({ state: 'visible'})
-        await this.countryInput.fill(country)
+    async selectCountry(country: string): Promise<void> {
+        await this.countrySelect.waitFor({ state: 'visible'})
+        await this.countrySelect.selectOption({ label: country });
     }
 
-    async fillZone(zone: string): Promise<void> {
-        await this.zoneInput.waitFor({ state: 'visible'})
-        await this.zoneInput.fill(zone)
+    async selectZone(zone: string): Promise<void> {
+        await this.zoneSelect.waitFor({ state: 'visible'})
+        await this.zoneSelect.selectOption({ label: zone });
     }
 
     async clickContinueButton(): Promise<void> {
