@@ -10,4 +10,8 @@ export class HomePage {
         this.cartButton = page.locator('[data-id="217830"]');
     }
 
+    async goTo(): Promise<void> {
+    await this.page.goto('common/home');
+  }
+
 }
